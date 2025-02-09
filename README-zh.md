@@ -52,5 +52,4 @@
 
 <a href="https://www.buymeacoffee.com/yinan" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
-- https://www.nasdaq.com/feed/rssoutbound?category=Markets -> https://None.github.io/RSS-GPT/nasdaq-markets.xml
-- https://www.nasdaq.com/feed/rssoutbound?category=Stocks -> https://None.github.io/RSS-GPT/nasdaq-stocks.xml
+- https://www.nasdaq.com/feed/rssoutbound -> https://timsu27.github.io/RSS-GPT/nasdaq-latest.xml

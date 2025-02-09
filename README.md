@@ -54,5 +54,4 @@ These feeds on hosted in the [`docs/` subdirectory](https://github.com/yinan-c/R
 
 I will consider hosting more feeds in the future. Email me or submit an issue if there are any questions using the script or any suggestions.
 
-- https://www.nasdaq.com/feed/rssoutbound?category=Markets -> https://None.github.io/RSS-GPT/nasdaq-markets.xml
-- https://www.nasdaq.com/feed/rssoutbound?category=Stocks -> https://None.github.io/RSS-GPT/nasdaq-stocks.xml
+- https://www.nasdaq.com/feed/rssoutbound -> https://timsu27.github.io/RSS-GPT/nasdaq-latest.xml
