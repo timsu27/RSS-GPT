@@ -1,17 +1,13 @@
-name: cron_job
+name: RSS Feed Update
 
 # Controls when the workflow will run
 on:
-  # cron job every 2 hours
+  # cron job every 10 minutes
   schedule:
-   - cron: '*/10 * * * *'
+    - cron: '*/10 * * * *'
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-permissions:
-  contents: write
-  actions: write
-  
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -26,26 +22,24 @@ jobs:
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.WORK_TOKEN }}
-    
+          fetch-depth: 1
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
       - name: Set up Python 3.8
         uses: actions/setup-python@v4
         with:
           python-version: '3.8'
 
-      - name: Debug Info
-        run: |
-          echo "Current directory:"
-          pwd
-          echo "Repository contents:"
-          ls -la
-          echo "Git status:"
-          git status
-
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: ls_show
+
+      - name: Run RSS update script
         run: |
           python main.py
           ls -al docs/
@@ -54,18 +48,13 @@ jobs:
           CUSTOM_MODEL: ${{ secrets.CUSTOM_MODEL }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           U_NAME: ${{ secrets.U_NAME }}
-             
-      - name: PUSH
+
+      - name: Commit and push changes
         run: |
-          pwd
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-        
-          git status -s
-          git add docs/*
-          git add README*
+          git add -f docs/* || echo "No docs files to add"
+          git add -f README* || echo "No README files to add"
+
           export TZ='Europe/London'
-          git commit -m "Auto Build at `date +"%Y-%m-%d %H:%M"`"
-        
-          echo "======git push===="
-          git push
+          git commit -m "Auto Build at $(date +'%Y-%m-%d %H:%M')" || echo "No changes to commit"
+
+          git push origin HEAD:${GITHUB_REF#refs/heads/}
