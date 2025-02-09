@@ -29,7 +29,6 @@ max_entries = 1000
 
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 U_NAME = os.environ.get("U_NAME")
-OPENAI_PROXY = os.environ.get("OPENAI_PROXY")
 OPENAI_BASE_URL = os.environ.get("OPENAI_BASE_URL", "https://openrouter.ai/api/v1")
 custom_model = os.environ.get("CUSTOM_MODEL", "anthropic/claude-3.5-sonnet")
 deployment_url = f"https://{U_NAME}.github.io/RSS-GPT/"
@@ -185,20 +184,11 @@ def gpt_summary(query, model, language):
                 "content": f"Please summarize this article in {language} language, first extract {keyword_length} keywords, output in the same line, then line break, write a summary containing all the points in {summary_length} words in {language}, output in order by points, and output in the following format '<br><br>Summary:' , <br> is the line break of HTML, 2 must be retained when output, and must be before the word 'Summary:'",
             },
         ]
-    if not OPENAI_PROXY:
-        client = OpenAI(
-            api_key=OPENAI_API_KEY,
-            base_url=OPENAI_BASE_URL,
-        )
-    else:
-        client = OpenAI(
-            api_key=OPENAI_API_KEY,
-            # Or use the `OPENAI_BASE_URL` env var
-            base_url=OPENAI_BASE_URL,
-            # example: "http://my.test.server.example.com:8083",
-            http_client=httpx.Client(proxy=OPENAI_PROXY),
-            # example:"http://my.test.proxy.example.com",
-        )
+
+    client = OpenAI(
+        api_key=OPENAI_API_KEY,
+        base_url=OPENAI_BASE_URL,
+    )
     completion = client.chat.completions.create(
         model=model,
         messages=messages,
