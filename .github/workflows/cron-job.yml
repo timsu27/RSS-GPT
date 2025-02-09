@@ -38,6 +38,21 @@ jobs:
 
       - name: Run RSS update script
         run: |
+          # Verify environment variables
+          if [ -z "$OPENAI_API_KEY" ]; then
+            echo "Error: OPENAI_API_KEY is not set"
+            exit 1
+          fi
+          if [ -z "$OPENAI_BASE_URL" ]; then
+            echo "Error: OPENAI_BASE_URL is not set"
+            exit 1
+          fi
+          if [ -z "$CUSTOM_MODEL" ]; then
+            echo "Error: CUSTOM_MODEL is not set"
+            exit 1
+          fi
+
+          # Run the script
           python main.py
           ls -al docs/
         env:
