@@ -357,3 +357,12 @@ Summarized using anthropic/claude-3.5-sonnet
 Append: [Guru Fundamental Report for SOUN](https://www.nasdaq.com/articles/guru-fundamental-report-soun-10)
 append_entries: 1
 Finish: 2025-02-09 20:55:22.873584
+------------------------------------------------------
+Started: 2025-02-09 21:14:16.572767
+Existing_entries: 43
+Fetching from https://www.nasdaq.com/feed/rssoutbound
+Token length: 2561
+Summarized using anthropic/claude-3.5-sonnet
+Append: [Guru Fundamental Report for BKNG](https://www.nasdaq.com/articles/guru-fundamental-report-bkng-51)
+append_entries: 1
+Finish: 2025-02-09 21:14:23.084009
