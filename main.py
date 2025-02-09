@@ -171,14 +171,7 @@ def gpt_summary(query, model, language):
     if not OPENAI_API_KEY:
         raise ValueError("OpenAI API key is not set")
 
-    # Configure headers specifically for OpenRouter
-    headers = {
-        "Authorization": OPENAI_API_KEY,  # Remove 'Bearer ' prefix
-        "HTTP-Referer": "https://github.com/",  # Required by OpenRouter
-        "X-Title": "RSS-GPT",  # Identifying your application
-    }
-
-    client = OpenAI(api_key=OPENAI_API_KEY, base_url=OPENAI_BASE_URL, default_headers=headers)
+    client = OpenAI(api_key=OPENAI_API_KEY, base_url=OPENAI_BASE_URL)
 
     if language == "zh-tw":
         messages = [
