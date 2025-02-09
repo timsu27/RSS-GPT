@@ -59,7 +59,7 @@ jobs:
         env:
           OPENAI_BASE_URL: ${{ vars.OPENAI_BASE_URL }}
           CUSTOM_MODEL: ${{ vars.CUSTOM_MODEL }}
-          OPENAI_API_KEY: ${{ vars.OPENAI_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           U_NAME: ${{ secrets.U_NAME }}
 
       - name: Commit and push changes
